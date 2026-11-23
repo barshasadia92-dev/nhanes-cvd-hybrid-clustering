@@ -85,9 +85,20 @@ Run all cells from top to bottom. All study settings (split size, K, folds, SMOT
 
 It also runs on Google Colab: upload the notebook and the CSV, then run `!pip install imbalanced-learn xgboost` first.
 
-## Results
+## Key results
 
-After the notebook has run, the main results are in [`outputs/RESULTS_SUMMARY.md`](outputs/RESULTS_SUMMARY.md) and the figures in [`outputs/figures/`](outputs/figures/).
+**Sample:** 5,856 adults from NHANES 2017–2018, with CVD prevalence of 9.8%. The held-out test set has 1,172 participants.
+
+- **Discrimination is similar for every model.** All 12 models reach a test AUROC of **0.83–0.84**, and F1 is **0.35–0.39** at thresholds chosen for recall ≥ 0.70. For example, the primary model, Logistic Regression (Pure Hybrid), identifies 73% of CVD cases (AUROC 0.840).
+- **The clusters are stable but overlap.** K = 3 had the highest silhouette (0.185), which still means clusters overlap heavily. The clusters are nevertheless very reproducible across random seeds (ARI 0.995) and clinically distinct: an older, high-systolic-BP cluster has **20.5%** CVD prevalence, against **3.2%** in a younger, normotensive cluster.
+- **Cluster features did not improve prediction consistently.** In paired bootstrap comparisons against matched baselines, only the **SVM** improved, with F1 +0.026 (95% CI +0.004 to +0.050) and recall +0.068 (+0.019 to +0.126). Logistic Regression lost a little recall (−0.036). Random Forest and XGBoost showed no clear difference. AUROC changes were all below 0.01.
+- **Interpretation:** K-Means summarises information the classifiers can already learn from the raw clinical variables (mainly age and blood pressure), so the hybrid features help only the model that benefits from the extra non-linear structure (the RBF SVM).
+
+<p align="center">
+  <img src="outputs/figures/bootstrap_difference_ci.png" width="900" alt="Paired bootstrap 95% CIs for Pure Hybrid minus Baseline">
+</p>
+
+The full tables are in [`outputs/RESULTS_SUMMARY.md`](outputs/RESULTS_SUMMARY.md), and all figures are in [`outputs/figures/`](outputs/figures/).
 
 ## Limitations
 

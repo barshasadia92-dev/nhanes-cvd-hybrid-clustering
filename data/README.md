@@ -25,6 +25,10 @@ NHANES is publicly available from the U.S. CDC / National Center for Health Stat
 
 Other numeric columns are used as predictors automatically. Columns with more than 50% missing values in the training set are dropped.
 
+## Source cycle
+
+NHANES 2017–2018 (9,254 participants; respondent sequence numbers from 93703). Of these, 5,856 are adults aged 18 or over and are used in the analysis.
+
 ## Outcome definition
 
 <!-- TODO: describe how CVD was derived, e.g. which NHANES cycles and which MCQ questionnaire items
