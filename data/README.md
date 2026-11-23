@@ -31,5 +31,17 @@ NHANES 2017–2018 (9,254 participants; respondent sequence numbers from 93703).
 
 ## Outcome definition
 
-<!-- TODO: describe how CVD was derived, e.g. which NHANES cycles and which MCQ questionnaire items
-     (coronary heart disease, angina, heart attack, stroke, congestive heart failure) were combined. -->
+`CVD` is a composite, self-reported outcome taken from the NHANES 2017–2018 Medical Conditions questionnaire (`MCQ_J`). A participant is coded **CVD = 1** if they answered **"Yes"** to *any* of the following questions:
+
+| NHANES item | Question: "Has a doctor or other health professional ever told you that you had…" |
+|---|---|
+| `MCQ160C` | coronary heart disease |
+| `MCQ160E` | a heart attack (myocardial infarction) |
+| `MCQ160F` | a stroke |
+
+All other participants are coded **CVD = 0**, including those who answered "No", "Refused" (7) or "Don't know" (9), and those not asked the questions.
+
+**Notes**
+- Congestive heart failure (`MCQ160B`) and angina (`MCQ160D`) are **not** included in this definition.
+- The outcome is **self-reported** physician diagnosis, so it is subject to recall and under-diagnosis bias.
+- NHANES asks the `MCQ160` items only of participants aged **20 and over**. Participants aged 18–19 are therefore always coded CVD = 0. Very few people that age have CVD, so the effect on the results is negligible.
